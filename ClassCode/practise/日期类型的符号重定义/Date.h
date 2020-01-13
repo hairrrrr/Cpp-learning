@@ -6,16 +6,16 @@ class Date
 	friend ostream& operator<<(ostream& _cout, const Date& d);
 	friend istream& operator>>(istream& _cin, Date& d);
 public:
-	//¹¹Ôìº¯ÊıÎªÈë¿Ú£¬Èë¿ÚÈÕÆÚºÏ·¨£¬ºóÃæ¶¼ºÏ·¨
+	//æ„é€ å‡½æ•°ä¸ºå…¥å£ï¼Œå…¥å£æ—¥æœŸåˆæ³•ï¼Œåé¢éƒ½åˆæ³•
 	Date(int year = 2020, int month = 1, int day = 12)
 	{
-		//ÅĞ¶ÏÈÕÆÚÓĞĞ§ĞÔºÍÕıÈ·ĞÔ
+		//åˆ¤æ–­æ—¥æœŸæœ‰æ•ˆæ€§å’Œæ­£ç¡®æ€§
 		if (year <= 0 || month <= 0 || month > 12 || day <= 0 || day > getDay(year, month))
 		{
 			this->_year = 1;
 			this->_month = 1;
 			this->_day = 1;
-			cout << "ÈÕÆÚ·Ç·¨£¬ÈÕÆÚÖØÖÃÎª 1 - 1 - 1 £¡" << endl;
+			cout << "æ—¥æœŸéæ³•ï¼Œæ—¥æœŸé‡ç½®ä¸º 1 - 1 - 1 ï¼" << endl;
 		}
 		this->_year = year;
 		this->_month = month;
@@ -40,15 +40,15 @@ public:
 	{}
 
 	Date operator=(const Date& d) {
-		if (this != &d) {//ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬£¬²»ÏàÍ¬ÔÙ½øĞĞ²Ù×÷
+		if (this != &d) {//åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒï¼Œä¸ç›¸åŒå†è¿›è¡Œæ“ä½œ
 			this->_year = d._year;
 			this->_month = d._month;
 			this->_day = d._day;
 		}
 		return *this;
 	}
-	//×¢Òâ£º ´øµÈºÅµÄ²Ù×÷·û±ÈÈç += -= ++£¨Ç°ÖÃ£© --£¨Ç°ÖÃ£©£¬ÎÒÃÇÓÃÒıÓÃÀàĞÍ£¬¸Ä±äËüÔ­±¾µÄÖµ£¬·µ»ØÕâ¸öÒıÓÃÀàĞÍ
-	//		 ²»´øµÈºÅµÄ²Ù×÷·û ÎÒÃÇ²»ÓÃÒıÓÃÀàĞÍ£¬´´½¨Ò»¸öÁÙÊ±±äÁ¿£¬ĞŞ¸ÄÁÙÊ±±äÁ¿µÄÖµ£¬·µ»ØÕâ¸öÁÙÊ±±äÁ¿
+	//æ³¨æ„ï¼š å¸¦ç­‰å·çš„æ“ä½œç¬¦æ¯”å¦‚ += -= ++ï¼ˆå‰ç½®ï¼‰ --ï¼ˆå‰ç½®ï¼‰ï¼Œæˆ‘ä»¬ç”¨å¼•ç”¨ç±»å‹ï¼Œæ”¹å˜å®ƒåŸæœ¬çš„å€¼ï¼Œè¿”å›è¿™ä¸ªå¼•ç”¨ç±»å‹
+	//		 ä¸å¸¦ç­‰å·çš„æ“ä½œç¬¦ æˆ‘ä»¬ä¸ç”¨å¼•ç”¨ç±»å‹ï¼Œåˆ›å»ºä¸€ä¸ªä¸´æ—¶å˜é‡ï¼Œä¿®æ”¹ä¸´æ—¶å˜é‡çš„å€¼ï¼Œè¿”å›è¿™ä¸ªä¸´æ—¶å˜é‡
 	Date& operator+=(int days)
 	{
 		if (days < 0)
@@ -56,7 +56,7 @@ public:
 		_day += days;
 		while (_day > getDay(_year, _month))
 		{
-			_day -= getDay(_year, _month);//ÏÈ¼õÈ¥Õâ¸öÔÂµÄÌìÊı£¬È»ºóÔÂ·İ¼ÓÒ»£¬ÔÙÅĞ¶ÏÔÂ·İÊÇ·ñ´óÓÚ12
+			_day -= getDay(_year, _month);//å…ˆå‡å»è¿™ä¸ªæœˆçš„å¤©æ•°ï¼Œç„¶åæœˆä»½åŠ ä¸€ï¼Œå†åˆ¤æ–­æœˆä»½æ˜¯å¦å¤§äº12
 			++_month;
 			if (_month == 13)
 			{
@@ -73,7 +73,7 @@ public:
 			return *this += (-days);
 		_day -= days;
 		while (_day <= 0) {
-			//tmp._day += getDay(tmp._year, tmp._month - 1);//Èç¹ûÊÇ1ÔÂÄØ£¿ÕâÃ´Ğ´ÊÇ²»ºÏÊÊµÄ¡£
+			//tmp._day += getDay(tmp._year, tmp._month - 1);//å¦‚æœæ˜¯1æœˆå‘¢ï¼Ÿè¿™ä¹ˆå†™æ˜¯ä¸åˆé€‚çš„ã€‚
 			_month--;
 			if (_month == 0) {
 				_month = 12;
@@ -82,7 +82,7 @@ public:
 					_year = 1;
 					_month = 1;
 					_day = 1;
-					cout << "¼õÊıÌìÊı¹ıÓÚ´ó£¬ÈÕÆÚÖØÖÃÎª 1 - 1 - 1" << endl;
+					cout << "å‡æ•°å¤©æ•°è¿‡äºå¤§ï¼Œæ—¥æœŸé‡ç½®ä¸º 1 - 1 - 1" << endl;
 					break;
 				}
 			}	
@@ -93,14 +93,14 @@ public:
 
 	Date operator+(int days)
 	{	
-		//Ì«¹ıÓÚ·±Ëö
+		//å¤ªè¿‡äºç¹ç
 		/*Date tmp = *this;
 		if (days < 0)
 			return *this - (-days);
 		tmp._day += days;
 		while (tmp._day > getday(tmp._year,tmp._month))
 		{
-			tmp._day -= getday(tmp._year, tmp._month);//ÏÈ¼õÈ¥Õâ¸öÔÂµÄÌìÊı£¬È»ºóÔÂ·İ¼ÓÒ»£¬ÔÙÅĞ¶ÏÔÂ·İÊÇ·ñ´óÓÚ12
+			tmp._day -= getday(tmp._year, tmp._month);//å…ˆå‡å»è¿™ä¸ªæœˆçš„å¤©æ•°ï¼Œç„¶åæœˆä»½åŠ ä¸€ï¼Œå†åˆ¤æ–­æœˆä»½æ˜¯å¦å¤§äº12
 			++tmp._month;
 			if (tmp._month == 13)
 			{
@@ -109,10 +109,10 @@ public:
 			}
 		}
 		return tmp;*/
-		//ÓÅ»¯
-		Date tmp(*this);//¿½±´µ½ÁÙÊ±±äÁ¿ÉÏ
+		//ä¼˜åŒ–
+		Date tmp(*this);//æ‹·è´åˆ°ä¸´æ—¶å˜é‡ä¸Š
 		return tmp += days;
-		//µÈÍ¬ÓÚ
+		//ç­‰åŒäº
 		/*tmp += days;
 		return tmp;*/
 	}
@@ -122,8 +122,8 @@ public:
 		//Date tmp = *this;
 		//tmp._day -= days;
 		//while (tmp._day <= 0) {
-		//	//tmp._day += getDay(tmp._year, tmp._month - 1);//Èç¹ûÊÇ1ÔÂÄØ£¿
-		//	tmp._month--;//ÌìÊıĞ¡ÓÚ0ËµÃ÷Ê±¼äµ½ÁËÉÏ¸öÔÂ£¬ÕâÀïÏÈ¼õÒ»¸öÔÂ£¬È»ºóÅĞ¶ÏÔÂ·İÊÇ·ñĞ¡ÓëµÈÓÚ0£¬Äê·İĞ¡ÓÚµÈÓÚ0£¬×îºó¼ÓÉÏ¼õ¹ıÖ®ºó£¨ÉÏ¸öÔÂ£©µÄÌìÊı¡£
+		//	//tmp._day += getDay(tmp._year, tmp._month - 1);//å¦‚æœæ˜¯1æœˆå‘¢ï¼Ÿ
+		//	tmp._month--;//å¤©æ•°å°äº0è¯´æ˜æ—¶é—´åˆ°äº†ä¸Šä¸ªæœˆï¼Œè¿™é‡Œå…ˆå‡ä¸€ä¸ªæœˆï¼Œç„¶ååˆ¤æ–­æœˆä»½æ˜¯å¦å°ä¸ç­‰äº0ï¼Œå¹´ä»½å°äºç­‰äº0ï¼Œæœ€ååŠ ä¸Šå‡è¿‡ä¹‹åï¼ˆä¸Šä¸ªæœˆï¼‰çš„å¤©æ•°ã€‚
 		//	if (tmp._month == 0) {
 		//		tmp._month = 12;
 		//		tmp._year--;
@@ -131,7 +131,7 @@ public:
 		//			tmp._year = 1;
 		//			tmp._month = 1;
 		//			tmp._day = 1;
-		//			cout << "¼õÊıÌìÊı¹ıÓÚ´ó£¬ÈÕÆÚÖØÖÃÎª 1 - 1 - 1" << endl;
+		//			cout << "å‡æ•°å¤©æ•°è¿‡äºå¤§ï¼Œæ—¥æœŸé‡ç½®ä¸º 1 - 1 - 1" << endl;
 		//			break;
 		//		}
 		//	}
@@ -142,13 +142,13 @@ public:
 		return tmp -= days;
 	}
 
-	//ÕâÀï×¢ÒâÇ°ÖÃµÄÓëºóÖÃµÄ²»Í¬
-	//Ç°ÖÃµÄÎÒÃÇ·µ»Ø¼Ó1ºóµÄÖµ£¬Ò²¾ÍÊÇ*thisÖ¸Õë
-	//ºóÖÃµÄÎÒÃÇ·µ»Ø¼Ó1Ö®Ç°µÄÖµ£¬Ò²¾ÍÊÇ´´½¨µÄÁÙÊ±±äÁ¿
+	//è¿™é‡Œæ³¨æ„å‰ç½®çš„ä¸åç½®çš„ä¸åŒ
+	//å‰ç½®çš„æˆ‘ä»¬è¿”å›åŠ 1åçš„å€¼ï¼Œä¹Ÿå°±æ˜¯*thisæŒ‡é’ˆ
+	//åç½®çš„æˆ‘ä»¬è¿”å›åŠ 1ä¹‹å‰çš„å€¼ï¼Œä¹Ÿå°±æ˜¯åˆ›å»ºçš„ä¸´æ—¶å˜é‡
 	//++x
 	Date& operator++(int days)
 	{
-		return *this += 1;//½øÎ»ÎÊÌâ »áµ÷ÓÃ+= À´½â¾ö 
+		return *this += 1;//è¿›ä½é—®é¢˜ ä¼šè°ƒç”¨+= æ¥è§£å†³ 
 	}
 	//x++
 	Date operator++()
@@ -209,6 +209,31 @@ public:
 	bool operator!=(const Date& d)const
 	{
 		return !(*this == d);
+	}
+		//æ—¥æœŸç›¸å‡
+	int operator-(const Date& d)
+	{
+		Date min, max;
+		int count = 0;
+		int flag;
+		if (*this > d)
+		{
+			max = *this;
+			min = d;
+			flag = 1;
+		}
+		else
+		{
+			max = d;
+			min = *this;
+			flag = -1;
+		}
+		if (min < max)
+		{
+			++min;
+			++count;
+		}
+		return count * flag;
 	}
 private:
 	int _year;
